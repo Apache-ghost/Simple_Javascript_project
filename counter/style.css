@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#counter {
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+#counterControl {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 24px;
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}

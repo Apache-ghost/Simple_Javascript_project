@@ -1,0 +1,18 @@
+body{
+    padding: 4rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+h1 >span{
+    color: blue;
+}
+button{
+    background-color:blue;
+    color: whitesmoke;
+    padding: .5rem 1rem;
+    border: 0;
+    cursor: pointer;
+    box-shadow: 0 0 12px 8px (0,0,0,0.3);
+}
+button:hover{
+    background-color: darkblue;
+}

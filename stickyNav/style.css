@@ -1,0 +1,57 @@
+/* style.css */
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Navigation Styles */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav li {
+    margin-right: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    padding: 5px;
+}
+
+nav a:hover {
+    background-color: blue;
+    color: white;
+}
+
+/* Section Styles */
+article {
+    margin-top: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+p {
+    margin-top: 10px;
+}
+
+/* Active Section Styles */
+section.active {
+    background-color: #d3d3d3;
+}

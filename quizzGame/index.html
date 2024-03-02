@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    
+    h1 {
+      margin-top: 40px;
+      font-size: 36px;
+    }
+    
+    #question {
+      margin-top: 40px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    .answerOption {
+      display: block;
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px auto;
+      cursor: pointer;
+    }
+    
+    #submitBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    
+    #result {
+      margin-top: 40px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz App</h1>
+  <div id="question"></div>
+  <div id="answers"></div>
+  <button id="submitBtn">Submit Answer</button>
+  <p id="result"></p>
+
+  <script>
+    // Quiz questions
+    const quizQuestions = [
+      {
+        question: 'What is the capital of France?',
+        options: ['Paris', 'London', 'Berlin', 'Rome'],
+        correctAnswer: 'Paris'
+      },
+      {
+        question: 'Who painted the Mona Lisa?',
+        options: ['Leonardo da Vinci', 'Pablo Picasso', 'Vincent van Gogh', 'Michelangelo'],
+        correctAnswer: 'Leonardo da Vinci'
+      },
+      // Add more questions here...
+    ];
+
+    // Get DOM elements
+    const questionElement = document.getElementById('question');
+    const answerElement = document.getElementById('answers');
+    const submitBtn = document.getElementById('submitBtn');
+    const resultText = document.getElementById('result');
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    // Display the current question and answer options
+    function displayQuestion() {
+      const currentQuestion = quizQuestions[currentQuestionIndex];
+      questionElement.textContent = currentQuestion.question;
+
+      answerElement.innerHTML = ''; // Clear previous answer options
+
+      // Create radio buttons for each answer option
+      currentQuestion.options.forEach((option, index) => {
+        const radioButton = document.createElement('input');
+        radioButton.type = 'radio';
+        radioButton.name = 'answer';
+        radioButton.value = option;
+        radioButton.id = `option${index}`;
+        answerElement.appendChild(radioButton);
+
+        const label = document.createElement('label');
+        label.textContent = option;
+        label.setAttribute('for', `option${index}`);
+        answerElement.appendChild(label);
+
+        answerElement.appendChild(document.createElement('br'));
+      });
+    }
+
+    // Check the user's answer and provide feedback
+    function checkAnswer() {
+      const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+
+      if (selectedAnswer) {
+        const userAnswer = selectedAnswer.value;
+        const correctAnswer = quizQuestions[currentQuestionIndex].correctAnswer;
+
+        if (userAnswer === correctAnswer) {
+          score++;
+          resultText.textContent = 'Correct!';
+        } else {
+          resultText.textContent = `Incorrect. The correct answer is ${correctAnswer}.`;
+        }
+
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex < quizQuestions.length) {
+          displayQuestion();
+        } else {
+          displayFinalScore();
+        }
+
+        selectedAnswer.checked = false; // Clear the selected answer
+      } else {
+        resultText.textContent= 'Please select an answer.';
+      }
+    }
+
+    // Display the final score
+    function displayFinalScore() {
+      questionElement.textContent = '';
+      answerElement.innerHTML = '';
+      submitBtn.style.display = 'none';
+      resultText.textContent = `Quiz completed! Your score is ${score}/${quizQuestions.length}.`;
+
+      // Allow the user to play again
+      const playAgainBtn = document.createElement('button');
+      playAgainBtn.textContent = 'Play Again';
+      playAgainBtn.addEventListener('click', resetQuiz);
+      answerElement.appendChild(playAgainBtn);
+    }
+
+    // Reset the quiz and play again
+    function resetQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      submitBtn.style.display = 'block';
+      resultText.textContent = '';
+      displayQuestion();
+    }
+
+    // Event listener for submit button
+    submitBtn.addEventListener('click', checkAnswer);
+
+    // Start the quiz
+    displayQuestion();
+  </script>
+</body>
+</html>
